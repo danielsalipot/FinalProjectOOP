@@ -1,17 +1,19 @@
+package FinalProjectPackage;
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.*;
 public class SplashScreen extends javax.swing.JFrame {
 
     public Timer tmr;
     public SplashScreen() {
         initComponents();
+        dispose();
+        
         load();
         tmr.start();
     }
     
     public void load(){
-         tmr = new Timer(10, new ActionListener(){      // Timer 4 seconds
+         tmr = new Timer(1, new ActionListener(){      // Timer 4 seconds
             public void actionPerformed(ActionEvent e) {
                 if(loadbar.getValue() == 100){
                     tmr.stop();
@@ -19,7 +21,7 @@ public class SplashScreen extends javax.swing.JFrame {
                     Login lgn = new Login();
                     lgn.setVisible(true);                   
                 }
-                loadbar.setValue(loadbar.getValue()+1);
+                loadbar.setValue(loadbar.getValue()+10);
             }
         });
     };

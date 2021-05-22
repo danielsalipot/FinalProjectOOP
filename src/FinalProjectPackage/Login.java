@@ -1,10 +1,13 @@
+package FinalProjectPackage;
 import java.sql.*;
 import javax.swing.*;
-
 public class Login extends javax.swing.JFrame {
-
+    
+    ParentForm pf = new ParentForm();
     public Login() {
         initComponents();
+        usernametxt.setText("admin");
+        passwordtxt.setText("admin");
     }
 
     @SuppressWarnings("unchecked")
@@ -106,12 +109,15 @@ public class Login extends javax.swing.JFrame {
             ResultSet rs = st.executeQuery("Select * from usertbl where username='"+usernametxt.getText()+"' and password = '"+passwordtxt.getText()+"'");
             if(rs.next()){
                 JOptionPane.showMessageDialog(null, "Login Successful");
+                pf.setVisible(true);
+                dispose();
             }else{
                 JOptionPane.showMessageDialog(null, "Login Failed");
             }
             con.close();
         }
         catch(Exception e){
+            System.out.println(e);
             JOptionPane.showMessageDialog(null, "Connection Error");
         }
     }//GEN-LAST:event_loginbtnActionPerformed
