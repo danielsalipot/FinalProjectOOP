@@ -1,15 +1,13 @@
 package FinalProjectPackage;
 import javax.swing.*;
 import java.sql.*;
-
-import java.awt.Color;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.awt.*;
+import net.proteanit.sql.DbUtils;
 
 public class CustomerForm extends javax.swing.JInternalFrame {
 
+    Statement st;
+    ResultSet rs;
     public CustomerForm() {
         initComponents();
     }
@@ -47,6 +45,23 @@ public class CustomerForm extends javax.swing.JInternalFrame {
         setMaximizable(true);
         setResizable(true);
         setOpaque(false);
+        addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
+            public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameClosed(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameClosing(javax.swing.event.InternalFrameEvent evt) {
+                closing(evt);
+            }
+            public void internalFrameDeactivated(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameDeiconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameIconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameOpened(javax.swing.event.InternalFrameEvent evt) {
+            }
+        });
 
         fname.setEnabled(false);
 
@@ -90,30 +105,6 @@ public class CustomerForm extends javax.swing.JInternalFrame {
 
         jLabel5.setText("Home Address");
 
-        custtbl.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "Customerid", "Firstname", "Lastname", "Contactnum", "Email", "Address"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
-            };
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-
         org.jdesktop.swingbinding.JTableBinding jTableBinding = org.jdesktop.swingbinding.SwingBindings.createJTableBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, customertblList1, custtbl);
         org.jdesktop.swingbinding.JTableBinding.ColumnBinding columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${customerid}"));
         columnBinding.setColumnName("Customerid");
@@ -135,6 +126,12 @@ public class CustomerForm extends javax.swing.JInternalFrame {
         columnBinding.setColumnClass(String.class);
         bindingGroup.addBinding(jTableBinding);
         jTableBinding.bind();
+
+        custtbl.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                custtblClick(evt);
+            }
+        });
         jScrollPane1.setViewportView(custtbl);
 
         updatebtn.setText("Update Customer");
@@ -239,6 +236,7 @@ public class CustomerForm extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    // enable all text fields
     public void setFields(Boolean b){
         fname.setEnabled(b);
         lname.setEnabled(b);
@@ -247,6 +245,7 @@ public class CustomerForm extends javax.swing.JInternalFrame {
         address.setEnabled(b);
     }
     
+    // Clear all text fields
     public void clearTxt(){
         fname.setText("");
         lname.setText("");
@@ -255,17 +254,20 @@ public class CustomerForm extends javax.swing.JInternalFrame {
         address.setText("");
     }
     
+    // Set button to save changes to confirm the changes
     public void setSaveButton(JButton b){
         b.setText("Save Changes");
         b.setBackground(Color.RED);
         b.setForeground(Color.white);
     }
     
+    // Set button to default State
     public void setDefaultButton(JButton b){
         b.setBackground(new Color(214,217,223));
         b.setForeground(Color.BLACK);
     }
     
+    // Returns new connection object
     public Connection newCon(){
         try{
             Class.forName("com.mysql.jdbc.Driver");
@@ -285,10 +287,12 @@ public class CustomerForm extends javax.swing.JInternalFrame {
         }else{
             try {
                Statement st = newCon().createStatement();
-               st.executeUpdate("INSERT INTO customertbl(firstname,lastname,contactnum,email,address) VALUES("+fname.getText()+","+lname.getText()+","+cnum.getText()+","+email.getText()+","+address.getText()+")");
-               JOptionPane.showMessageDialog(null, "Added Successfull");
+               st.executeUpdate("INSERT INTO customertbl(firstname,lastname,contactnum,email,address) VALUES('"+fname.getText()+"','"+lname.getText()+"','"+cnum.getText()+"','"+email.getText()+"','"+address.getText()+"')");
+               JOptionPane.showMessageDialog(null, "Created Successfull");
+               updateTable();
             } catch (Exception e) {
-               System.out.println(e);
+                JOptionPane.showMessageDialog(null, "Creation Failed");
+                System.out.println(e);
             }
             
             setFields(false);
@@ -297,37 +301,75 @@ public class CustomerForm extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_addbtnActionPerformed
 
+    //Refresh the data on the table 
+    public void updateTable(){
+       try{
+            st = newCon().createStatement();
+            rs = st.executeQuery("SELECT * FROM customertbl");
+            custtbl.setModel(DbUtils.resultSetToTableModel(rs));
+       }catch(Exception e){
+           System.out.println(e);
+       }
+    }
+    
     private void updatebtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updatebtnActionPerformed
        if(updatebtn.getText() != "Save Changes"){
             setFields(true);
             setSaveButton(updatebtn);
         }else{
-           try {
-               Statement st = newCon().createStatement();
-               st.executeUpdate("UPDATE customertbl SET firstname='"+fname.getText()+"' WHERE customerid = 1");
-               JOptionPane.showMessageDialog(null, "Update Successfull");
-           } catch (Exception e) {
-               System.out.println(e);
-           }
-           
-           org.jdesktop.beansbinding.Binding binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ, custtbl, org.jdesktop.beansbinding.ELProperty.create("${selectedElement.firstname}"), fname, org.jdesktop.beansbinding.BeanProperty.create("text"));
-           bindingGroup.addBinding(binding);
-           setFields(false);
-           updatebtn.setText("Update Customer");
-           setDefaultButton(updatebtn);
+            try {
+                st = newCon().createStatement();
+                st.executeUpdate("UPDATE customertbl SET firstname='"+fname.getText()+"', lastname = '"+lname.getText()+"', contactnum = '"+cnum.getText()+"',email = '"+email.getText()+"', address = '"+address.getText()+"' WHERE customerid = "+jLabel7.getText()+"");
+                JOptionPane.showMessageDialog(null, "Update Successfull");
+                setFields(false);
+                updateTable();
+                updatebtn.setText("Update Customer");
+                setDefaultButton(updatebtn);
+                
+            }catch (Exception e) {
+                System.out.println(e);
+                JOptionPane.showMessageDialog(null, "Update Failed");
+                setFields(false);
+                updateTable();
+                updatebtn.setText("Update Customer");
+                setDefaultButton(updatebtn);
+            }
         }
     }//GEN-LAST:event_updatebtnActionPerformed
 
     private void deletebtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deletebtnActionPerformed
-        if(deletebtn.getText() != "Save Changes"){
-            setFields(true);
+        if(deletebtn.getText() == "Delete Customer"){
             setSaveButton(deletebtn);
-        }else{
-           setFields(false);
-           deletebtn.setText("Delete Customer");
-           setDefaultButton(deletebtn);
+            deletebtn.setText("Delete User: "+jLabel7.getText());
+        }
+        else{
+            setDefaultButton(deletebtn);
+            deletebtn.setText("Delete Customer");
+            try{
+                st = newCon().createStatement();
+                st.executeUpdate("DELETE FROM customertbl where customerid = "+jLabel7.getText());
+                updateTable();
+                JOptionPane.showMessageDialog(null, "User: "+jLabel7.getText()+" record has been deleted");
+            }catch(Exception e){
+                System.out.println(e);
+            }
         }
     }//GEN-LAST:event_deletebtnActionPerformed
+
+    private void closing(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_closing
+        this.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
+        this.hide();
+    }//GEN-LAST:event_closing
+
+    // jLabel7 = customer id
+    private void custtblClick(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_custtblClick
+        fname.setText(custtbl.getValueAt(custtbl.getSelectedRow(), 1).toString());
+        lname.setText(custtbl.getValueAt(custtbl.getSelectedRow(), 2).toString());
+        cnum.setText(custtbl.getValueAt(custtbl.getSelectedRow(), 3).toString());
+        email.setText(custtbl.getValueAt(custtbl.getSelectedRow(), 4).toString());
+        address.setText(custtbl.getValueAt(custtbl.getSelectedRow(), 5).toString());
+        jLabel7.setText(custtbl.getValueAt(custtbl.getSelectedRow(), 0).toString());
+    }//GEN-LAST:event_custtblClick
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
