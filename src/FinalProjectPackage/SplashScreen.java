@@ -6,14 +6,15 @@ public class SplashScreen extends javax.swing.JFrame {
     public Timer tmr;
     public SplashScreen() {
         initComponents();
-        dispose();
+             
+        
         
         load();
         tmr.start();
     }
     
     public void load(){
-         tmr = new Timer(1, new ActionListener(){      // Timer 4 seconds
+         tmr = new Timer(50, new ActionListener(){      // Timer 4 seconds
             public void actionPerformed(ActionEvent e) {
                 if(loadbar.getValue() == 100){
                     tmr.stop();
@@ -21,7 +22,7 @@ public class SplashScreen extends javax.swing.JFrame {
                     Login lgn = new Login();
                     lgn.setVisible(true);                   
                 }
-                loadbar.setValue(loadbar.getValue()+10);
+                loadbar.setValue(loadbar.getValue()+1);
             }
         });
     };
@@ -30,43 +31,34 @@ public class SplashScreen extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel1 = new javax.swing.JPanel();
         loadbar = new javax.swing.JProgressBar();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setLocation(new java.awt.Point(400, 100));
+        setUndecorated(true);
+        setResizable(false);
 
-        jLabel1.setText("Akatsuki");
+        jPanel1.setBackground(new java.awt.Color(0, 0, 0));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel4.setText("Library Management System");
+        loadbar.setBackground(new java.awt.Color(255, 0, 51));
+        jPanel1.add(loadbar, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 310, 400, 30));
+
+        jLabel5.setIcon(new javax.swing.ImageIcon("C:\\Users\\Nehemiah\\Desktop\\Akat\\FinalProjectOOP\\Pictures\\Logo black_adobespark.png")); // NOI18N
+        jLabel5.setAlignmentY(0.0F);
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 60, 320, 210));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(121, 121, 121)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel4)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(54, 54, 54)
-                        .addComponent(jLabel1)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(65, Short.MAX_VALUE)
-                .addComponent(loadbar, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(45, 45, 45))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 637, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(88, 88, 88)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(loadbar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(143, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 376, Short.MAX_VALUE)
         );
 
         pack();
@@ -106,8 +98,8 @@ public class SplashScreen extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JProgressBar loadbar;
     // End of variables declaration//GEN-END:variables
 }
