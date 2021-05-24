@@ -3,26 +3,24 @@ import javax.swing.*;
 import java.awt.event.*;
 public class SplashScreen extends javax.swing.JFrame {
 
+    int time = 0;
     public Timer tmr;
     public SplashScreen() {
-        initComponents();
-             
-        
-        
+        initComponents();  
         load();
         tmr.start();
     }
     
     public void load(){
-         tmr = new Timer(50, new ActionListener(){      // Timer 4 seconds
+         tmr = new Timer(70, new ActionListener(){      // Timer 4 seconds
             public void actionPerformed(ActionEvent e) {
-                if(loadbar.getValue() == 100){
+                if(time == 100){
                     tmr.stop();
                     dispose();
                     Login lgn = new Login();
                     lgn.setVisible(true);                   
                 }
-                loadbar.setValue(loadbar.getValue()+1);
+                time++;
             }
         });
     };
@@ -32,7 +30,6 @@ public class SplashScreen extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        loadbar = new javax.swing.JProgressBar();
         jLabel5 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -43,22 +40,19 @@ public class SplashScreen extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(0, 0, 0));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        loadbar.setBackground(new java.awt.Color(255, 0, 51));
-        jPanel1.add(loadbar, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 310, 400, 30));
-
-        jLabel5.setIcon(new javax.swing.ImageIcon("C:\\Users\\Nehemiah\\Desktop\\Akat\\FinalProjectOOP\\Pictures\\Logo black_adobespark.png")); // NOI18N
+        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Pictures/loading.gif"))); // NOI18N
         jLabel5.setAlignmentY(0.0F);
-        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 60, 320, 210));
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(-110, 50, 630, 300));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 637, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 706, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 376, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 394, Short.MAX_VALUE)
         );
 
         pack();
@@ -100,6 +94,5 @@ public class SplashScreen extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JProgressBar loadbar;
     // End of variables declaration//GEN-END:variables
 }

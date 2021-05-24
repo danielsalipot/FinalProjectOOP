@@ -45,7 +45,7 @@ public class ParentForm extends javax.swing.JFrame {
             .addGap(0, 0, Short.MAX_VALUE)
         );
 
-        Logoutbtn.setBackground(new java.awt.Color(204, 0, 51));
+        Logoutbtn.setBackground(new java.awt.Color(153, 0, 0));
 
         registrationbtn.setFont(new java.awt.Font("Verdana", 0, 18)); // NOI18N
         registrationbtn.setText("Library Card Registration");
@@ -79,7 +79,7 @@ public class ParentForm extends javax.swing.JFrame {
             }
         });
 
-        logoutbtn.setBackground(new java.awt.Color(255, 51, 51));
+        logoutbtn.setBackground(new java.awt.Color(0, 102, 102));
         logoutbtn.setFont(new java.awt.Font("Verdana", 0, 18)); // NOI18N
         logoutbtn.setForeground(new java.awt.Color(255, 255, 255));
         logoutbtn.setText("Logout");
@@ -114,8 +114,8 @@ public class ParentForm extends javax.swing.JFrame {
                 .addComponent(borrowbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(returningbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(logoutbtn, javax.swing.GroupLayout.DEFAULT_SIZE, 87, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 47, Short.MAX_VALUE)
+                .addComponent(logoutbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -175,6 +175,10 @@ public class ParentForm extends javax.swing.JFrame {
     }//GEN-LAST:event_returningbtnActionPerformed
 
     private void logoutbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutbtnActionPerformed
+        cf.dispose();
+        bf.dispose();
+        brf.dispose();
+        rf.dispose();
         dispose();
         Login l = new Login();
         l.setVisible(true);
