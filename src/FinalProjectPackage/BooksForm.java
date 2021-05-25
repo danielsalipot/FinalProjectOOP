@@ -61,8 +61,10 @@ public class BooksForm extends javax.swing.JInternalFrame {
         cancelbtn.setEnabled(true);
     }
     
-    public void setDefaultButton(JButton b){
+    public void setDefaultButton(JButton b, String a){
         b.setBackground(Color.white);
+        b.setText(a);
+        cancelbtn.setEnabled(false);
     };
 
     @SuppressWarnings("unchecked")
@@ -97,6 +99,7 @@ public class BooksForm extends javax.swing.JInternalFrame {
         searchcmb = new javax.swing.JComboBox<>();
         refreshbtn = new javax.swing.JButton();
         jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
 
         setClosable(true);
         setIconifiable(true);
@@ -228,6 +231,8 @@ public class BooksForm extends javax.swing.JInternalFrame {
 
         jLabel8.setText("Library Management System");
 
+        jLabel9.setText("Search");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -284,10 +289,16 @@ public class BooksForm extends javax.swing.JInternalFrame {
                                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                                             .addComponent(rowspnr, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                             .addComponent(idlbl))))))))
-                                .addGap(189, 189, 189)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(searchcmb, 0, 256, Short.MAX_VALUE)
-                                    .addComponent(searchtxt)))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(189, 189, 189)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(searchcmb, 0, 256, Short.MAX_VALUE)
+                                            .addComponent(searchtxt)))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jLabel9)
+                                        .addGap(108, 108, 108))))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(198, 198, 198)
                                 .addComponent(jLabel8)))
@@ -310,7 +321,8 @@ public class BooksForm extends javax.swing.JInternalFrame {
                             .addComponent(jLabel2)
                             .addComponent(authortxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel5)
-                            .addComponent(shelfcmb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(shelfcmb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel9))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(publishertxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -356,17 +368,19 @@ public class BooksForm extends javax.swing.JInternalFrame {
                 try{                
                     String location = String.valueOf(genretxt.getText().charAt(0))+ ":" + shelfcmb.getSelectedItem() + ":" + rowspnr.getValue();
                     newStatement().executeUpdate("INSERT INTO bookstbl (title,author,publisher,genre,location) VALUES ('"+titletxt.getText()+"','"+authortxt.getText()+"','"+publishertxt.getText()+"','"+genretxt.getText()+"','"+location+"')");
-                    JOptionPane.showMessageDialog(null,"Record Deleted","A new book has added",JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(null,"Record Added","A new book has added",JOptionPane.INFORMATION_MESSAGE);
                     updateTable();
-                    setDefaultButton(addbtn);
+                    setDefaultButton(addbtn, "Add Book");
                     addbtn.setText("Add Book");
                     clearTxt();
+                    setFields(false);
                 }catch(HeadlessException | SQLException e){
                     System.out.println(e);
                 }
             }
         }
         else{
+            clearTxt();
             setSaveButton(addbtn);
             setFields(true);
         }
@@ -378,12 +392,9 @@ public class BooksForm extends javax.swing.JInternalFrame {
         cancelbtn.setEnabled(false);
         deletebtn.setEnabled(false);
         updatebtn.setEnabled(false);
-        setDefaultButton(deletebtn);
-        setDefaultButton(updatebtn);
-        setDefaultButton(addbtn);
-        deletebtn.setText("Delete Book");
-        updatebtn.setText("Update Book");
-        addbtn.setText("Add Book");
+        setDefaultButton(deletebtn,"Delete Book");
+        setDefaultButton(updatebtn, "Update Book");
+        setDefaultButton(addbtn, "Add Book");
     }//GEN-LAST:event_cancelbtnActionPerformed
 
     private void deletebtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deletebtnActionPerformed
@@ -391,6 +402,10 @@ public class BooksForm extends javax.swing.JInternalFrame {
             try{
                 newStatement().executeUpdate("DELETE FROM bookstbl where bookid = "+idlbl.getText());
                 JOptionPane.showMessageDialog(null,"Record Deleted","Book #" + idlbl.getText() + " records has been deleted",JOptionPane.INFORMATION_MESSAGE);
+                clearTxt();
+                setFields(false);
+                setDefaultButton(deletebtn, "Delete Book");
+                
             }catch(HeadlessException | SQLException e){
                 System.out.println(e);
             }
@@ -430,8 +445,11 @@ public class BooksForm extends javax.swing.JInternalFrame {
             try{
                 if(!"".equals(titletxt.getText()) && !"".equals(authortxt.getText()) && !"".equals(publishertxt.getText()) && !"".equals(genretxt.getText())){
                     String location = String.valueOf(genretxt.getText().charAt(0))+ ":" + shelfcmb.getSelectedItem() + ":" + rowspnr.getValue();
-                    newStatement().executeUpdate("UPDATE bookstbl SET title ='"+titletxt.getText()+"',author='"+authortxt.getText()+"',publisher = '"+publishertxt.getText()+"',genre = '"+genretxt.getText()+"', location='"+location+"'");
-                    JOptionPane.showMessageDialog(null,"Book #"+idlbl.getText()+" has been updated");     
+                    newStatement().executeUpdate("UPDATE bookstbl SET title ='"+titletxt.getText()+"',author='"+authortxt.getText()+"',publisher = '"+publishertxt.getText()+"',genre = '"+genretxt.getText()+"', location='"+location+"' WHERE bookid = " + idlbl.getText());
+                    JOptionPane.showMessageDialog(null,"Book #"+idlbl.getText()+" has been updated");
+                    setFields(false);
+                    setDefaultButton(updatebtn, "Update Book");
+                    updatebtn.setText("Update Book");
                 }
                 else{
                     JOptionPane.showMessageDialog(null, "Update Failed","All fields are required",JOptionPane.ERROR_MESSAGE);
@@ -482,6 +500,7 @@ public class BooksForm extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField publishertxt;
     private javax.swing.JButton refreshbtn;
