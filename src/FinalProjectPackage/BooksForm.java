@@ -62,7 +62,7 @@ public class BooksForm extends javax.swing.JInternalFrame {
     }
     
     public void setDefaultButton(JButton b, String a){
-        b.setBackground(Color.white);
+        b.setBackground(Color.BLACK);
         b.setText(a);
         cancelbtn.setEnabled(false);
     };
@@ -75,14 +75,7 @@ public class BooksForm extends javax.swing.JInternalFrame {
         entityManager = java.beans.Beans.isDesignTime() ? null : javax.persistence.Persistence.createEntityManagerFactory("libsysdb?zeroDateTimeBehavior=convertToNullPU").createEntityManager();
         bookstblQuery = java.beans.Beans.isDesignTime() ? null : entityManager.createQuery("SELECT b FROM Bookstbl b");
         bookstblList = java.beans.Beans.isDesignTime() ? java.util.Collections.emptyList() : bookstblQuery.getResultList();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        booktbl = new javax.swing.JTable();
         addbtn = new javax.swing.JButton();
-        cancelbtn = new javax.swing.JButton();
-        deletebtn = new javax.swing.JButton();
-        updatebtn = new javax.swing.JButton();
-        refreshbtn = new javax.swing.JButton();
-        jLabel9 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -99,18 +92,27 @@ public class BooksForm extends javax.swing.JInternalFrame {
         idlbl = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         rowspnr = new javax.swing.JSpinner();
+        jPanel1 = new javax.swing.JPanel();
+        jLabel8 = new javax.swing.JLabel();
+        cancelbtn = new javax.swing.JButton();
+        updatebtn = new javax.swing.JButton();
+        deletebtn = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         searchcmb = new javax.swing.JComboBox<>();
         searchtxt = new javax.swing.JTextField();
-        jPanel1 = new javax.swing.JPanel();
-        jLabel8 = new javax.swing.JLabel();
+        refreshbtn = new javax.swing.JButton();
+        jLabel9 = new javax.swing.JLabel();
+        jPanel7 = new javax.swing.JPanel();
+        jLabel10 = new javax.swing.JLabel();
+        jPanel6 = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        booktbl = new javax.swing.JTable();
 
         setBackground(new java.awt.Color(51, 51, 51));
         setClosable(true);
         setForeground(new java.awt.Color(51, 51, 51));
         setIconifiable(true);
-        setMaximizable(true);
         addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
             public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
             }
@@ -130,38 +132,6 @@ public class BooksForm extends javax.swing.JInternalFrame {
         });
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        booktbl.setFont(new java.awt.Font("sansserif", 0, 14)); // NOI18N
-
-        org.jdesktop.swingbinding.JTableBinding jTableBinding = org.jdesktop.swingbinding.SwingBindings.createJTableBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, bookstblList, booktbl);
-        org.jdesktop.swingbinding.JTableBinding.ColumnBinding columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${bookid}"));
-        columnBinding.setColumnName("Bookid");
-        columnBinding.setColumnClass(Integer.class);
-        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${title}"));
-        columnBinding.setColumnName("Title");
-        columnBinding.setColumnClass(String.class);
-        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${author}"));
-        columnBinding.setColumnName("Author");
-        columnBinding.setColumnClass(String.class);
-        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${publisher}"));
-        columnBinding.setColumnName("Publisher");
-        columnBinding.setColumnClass(String.class);
-        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${genre}"));
-        columnBinding.setColumnName("Genre");
-        columnBinding.setColumnClass(String.class);
-        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${location}"));
-        columnBinding.setColumnName("Location");
-        columnBinding.setColumnClass(String.class);
-        bindingGroup.addBinding(jTableBinding);
-        jTableBinding.bind();
-        booktbl.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                booktblMouseClicked(evt);
-            }
-        });
-        jScrollPane1.setViewportView(booktbl);
-
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 317, 1040, 310));
-
         addbtn.setBackground(new java.awt.Color(0, 0, 0));
         addbtn.setFont(new java.awt.Font("Verdana", 0, 14)); // NOI18N
         addbtn.setForeground(new java.awt.Color(255, 255, 255));
@@ -173,62 +143,10 @@ public class BooksForm extends javax.swing.JInternalFrame {
         });
         getContentPane().add(addbtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 260, 150, 40));
 
-        cancelbtn.setBackground(new java.awt.Color(0, 0, 0));
-        cancelbtn.setFont(new java.awt.Font("Verdana", 0, 14)); // NOI18N
-        cancelbtn.setForeground(new java.awt.Color(255, 255, 255));
-        cancelbtn.setText("Cancel");
-        cancelbtn.setEnabled(false);
-        cancelbtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cancelbtnActionPerformed(evt);
-            }
-        });
-        getContentPane().add(cancelbtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 260, 150, 40));
-
-        deletebtn.setBackground(new java.awt.Color(255, 0, 0));
-        deletebtn.setFont(new java.awt.Font("Verdana", 0, 14)); // NOI18N
-        deletebtn.setText("Delete Book");
-        deletebtn.setEnabled(false);
-        deletebtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                deletebtnActionPerformed(evt);
-            }
-        });
-        getContentPane().add(deletebtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 260, 150, 40));
-
-        updatebtn.setBackground(new java.awt.Color(0, 0, 0));
-        updatebtn.setFont(new java.awt.Font("Verdana", 0, 14)); // NOI18N
-        updatebtn.setForeground(new java.awt.Color(255, 255, 255));
-        updatebtn.setText("Update Book");
-        updatebtn.setEnabled(false);
-        updatebtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                updatebtnActionPerformed(evt);
-            }
-        });
-        getContentPane().add(updatebtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 260, 150, 40));
-
-        refreshbtn.setBackground(new java.awt.Color(0, 102, 102));
-        refreshbtn.setFont(new java.awt.Font("Verdana", 0, 14)); // NOI18N
-        refreshbtn.setForeground(new java.awt.Color(255, 255, 255));
-        refreshbtn.setText("Refresh Table");
-        refreshbtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                refreshbtnActionPerformed(evt);
-            }
-        });
-        getContentPane().add(refreshbtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 260, 147, 40));
-
-        jLabel9.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel9.setFont(new java.awt.Font("Verdana", 0, 16)); // NOI18N
-        jLabel9.setForeground(java.awt.Color.white);
-        jLabel9.setText("SEARCH");
-        getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 90, -1, -1));
-
-        jPanel4.setBackground(new java.awt.Color(153, 0, 0));
+        jPanel4.setBackground(new java.awt.Color(102, 0, 102));
         jPanel4.setForeground(new java.awt.Color(51, 51, 51));
 
-        jPanel5.setBackground(new java.awt.Color(51, 51, 51));
+        jPanel5.setBackground(new java.awt.Color(51, 0, 51));
 
         jLabel1.setBackground(new java.awt.Color(255, 255, 255));
         jLabel1.setFont(new java.awt.Font("Verdana", 0, 16)); // NOI18N
@@ -318,7 +236,7 @@ public class BooksForm extends javax.swing.JInternalFrame {
                                     .addComponent(rowspnr, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(shelfcmb, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(idlbl))))))
-                .addContainerGap(83, Short.MAX_VALUE))
+                .addContainerGap(107, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -374,12 +292,58 @@ public class BooksForm extends javax.swing.JInternalFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        getContentPane().add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 740, -1));
+        getContentPane().add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 70, 760, -1));
 
-        jPanel3.setBackground(new java.awt.Color(153, 0, 0));
+        jPanel1.setBackground(new java.awt.Color(51, 0, 51));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel2.setBackground(new java.awt.Color(51, 51, 51));
+        jLabel8.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel8.setText("LIBRARY MANAGMENT SYSTEM");
+        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 10, -1, -1));
 
+        cancelbtn.setBackground(new java.awt.Color(102, 0, 0));
+        cancelbtn.setFont(new java.awt.Font("Verdana", 0, 14)); // NOI18N
+        cancelbtn.setForeground(new java.awt.Color(255, 255, 255));
+        cancelbtn.setText("Cancel");
+        cancelbtn.setEnabled(false);
+        cancelbtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cancelbtnActionPerformed(evt);
+            }
+        });
+        jPanel1.add(cancelbtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 310, 730, 40));
+
+        updatebtn.setBackground(new java.awt.Color(0, 0, 0));
+        updatebtn.setFont(new java.awt.Font("Verdana", 0, 14)); // NOI18N
+        updatebtn.setForeground(new java.awt.Color(255, 255, 255));
+        updatebtn.setText("Update Book");
+        updatebtn.setEnabled(false);
+        updatebtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                updatebtnActionPerformed(evt);
+            }
+        });
+        jPanel1.add(updatebtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 260, 150, 40));
+
+        deletebtn.setBackground(new java.awt.Color(255, 0, 0));
+        deletebtn.setFont(new java.awt.Font("Verdana", 0, 14)); // NOI18N
+        deletebtn.setForeground(new java.awt.Color(255, 255, 255));
+        deletebtn.setText("Delete Book");
+        deletebtn.setEnabled(false);
+        deletebtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deletebtnActionPerformed(evt);
+            }
+        });
+        jPanel1.add(deletebtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 260, 150, 40));
+
+        jPanel3.setBackground(new java.awt.Color(102, 51, 0));
+
+        jPanel2.setBackground(new java.awt.Color(153, 102, 0));
+
+        searchcmb.setBackground(new java.awt.Color(51, 0, 0));
+        searchcmb.setForeground(new java.awt.Color(255, 255, 255));
         searchcmb.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Bookid", "Title", "Author", "Publisher", "Genre", "Location" }));
 
         searchtxt.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -388,25 +352,53 @@ public class BooksForm extends javax.swing.JInternalFrame {
             }
         });
 
+        refreshbtn.setBackground(new java.awt.Color(51, 0, 0));
+        refreshbtn.setFont(new java.awt.Font("Verdana", 0, 14)); // NOI18N
+        refreshbtn.setForeground(new java.awt.Color(255, 255, 255));
+        refreshbtn.setText("Refresh Table");
+        refreshbtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                refreshbtnActionPerformed(evt);
+            }
+        });
+
+        jLabel9.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel9.setFont(new java.awt.Font("Verdana", 0, 16)); // NOI18N
+        jLabel9.setForeground(java.awt.Color.white);
+        jLabel9.setText("SEARCH");
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(searchcmb, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(searchtxt, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(105, 105, 105)
+                        .addComponent(jLabel9)
+                        .addGap(0, 112, Short.MAX_VALUE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(searchcmb, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(searchtxt)))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(refreshbtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(28, 28, 28)
-                .addComponent(searchcmb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(searchtxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(19, Short.MAX_VALUE))
+                .addContainerGap()
+                .addComponent(jLabel9)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(searchcmb, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(searchtxt, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
+                .addComponent(refreshbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -426,17 +418,86 @@ public class BooksForm extends javax.swing.JInternalFrame {
                 .addContainerGap())
         );
 
-        getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 80, 270, 120));
+        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 70, 300, 210));
 
-        jPanel1.setBackground(new java.awt.Color(51, 51, 51));
-        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jPanel7.setBackground(new java.awt.Color(102, 0, 0));
 
-        jLabel8.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
-        jLabel8.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel8.setText("LIBRARY MANAGMENT SYSTEM");
-        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 10, -1, -1));
+        jLabel10.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel10.setFont(new java.awt.Font("Verdana", 0, 36)); // NOI18N
+        jLabel10.setForeground(java.awt.Color.white);
+        jLabel10.setText("Books Table");
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1060, 320));
+        javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
+        jPanel7.setLayout(jPanel7Layout);
+        jPanel7Layout.setHorizontalGroup(
+            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel7Layout.createSequentialGroup()
+                .addGap(40, 40, 40)
+                .addComponent(jLabel10)
+                .addContainerGap(42, Short.MAX_VALUE))
+        );
+        jPanel7Layout.setVerticalGroup(
+            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel7Layout.createSequentialGroup()
+                .addGap(25, 25, 25)
+                .addComponent(jLabel10)
+                .addContainerGap(54, Short.MAX_VALUE))
+        );
+
+        jPanel1.add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 280, 300, -1));
+
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1060, 360));
+
+        jPanel6.setBackground(new java.awt.Color(102, 0, 0));
+
+        booktbl.setFont(new java.awt.Font("sansserif", 0, 14)); // NOI18N
+
+        org.jdesktop.swingbinding.JTableBinding jTableBinding = org.jdesktop.swingbinding.SwingBindings.createJTableBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, bookstblList, booktbl);
+        org.jdesktop.swingbinding.JTableBinding.ColumnBinding columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${bookid}"));
+        columnBinding.setColumnName("Bookid");
+        columnBinding.setColumnClass(Integer.class);
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${title}"));
+        columnBinding.setColumnName("Title");
+        columnBinding.setColumnClass(String.class);
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${author}"));
+        columnBinding.setColumnName("Author");
+        columnBinding.setColumnClass(String.class);
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${publisher}"));
+        columnBinding.setColumnName("Publisher");
+        columnBinding.setColumnClass(String.class);
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${genre}"));
+        columnBinding.setColumnName("Genre");
+        columnBinding.setColumnClass(String.class);
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${location}"));
+        columnBinding.setColumnName("Location");
+        columnBinding.setColumnClass(String.class);
+        bindingGroup.addBinding(jTableBinding);
+        jTableBinding.bind();
+        booktbl.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                booktblMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(booktbl);
+
+        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
+        jPanel6.setLayout(jPanel6Layout);
+        jPanel6Layout.setHorizontalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
+                .addContainerGap(14, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1040, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+        jPanel6Layout.setVerticalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addGap(16, 16, 16)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 310, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(24, Short.MAX_VALUE))
+        );
+
+        getContentPane().add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 360, 1060, 350));
 
         bindingGroup.bind();
 
@@ -479,6 +540,10 @@ public class BooksForm extends javax.swing.JInternalFrame {
         setDefaultButton(deletebtn,"Delete Book");
         setDefaultButton(updatebtn, "Update Book");
         setDefaultButton(addbtn, "Add Book");
+        updatebtn.setEnabled(false);
+        deletebtn.setEnabled(false);
+        deletebtn.setBackground(Color.red);
+        deletebtn.setForeground(Color.WHITE);
     }//GEN-LAST:event_cancelbtnActionPerformed
 
     private void deletebtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deletebtnActionPerformed
@@ -488,7 +553,10 @@ public class BooksForm extends javax.swing.JInternalFrame {
                 JOptionPane.showMessageDialog(null,"Record Deleted","Book #" + idlbl.getText() + " records has been deleted",JOptionPane.INFORMATION_MESSAGE);
                 clearTxt();
                 setFields(false);
+                updateTable();
                 setDefaultButton(deletebtn, "Delete Book");
+                deletebtn.setBackground(Color.red);
+                deletebtn.setForeground(Color.WHITE);
                 
             }catch(HeadlessException | SQLException e){
                 System.out.println(e);
@@ -517,6 +585,8 @@ public class BooksForm extends javax.swing.JInternalFrame {
             }
         }
         deletebtn.setEnabled(true);
+        deletebtn.setBackground(Color.red);
+        deletebtn.setForeground(Color.WHITE);
         updatebtn.setEnabled(true);
     }//GEN-LAST:event_booktblMouseClicked
 
@@ -532,6 +602,7 @@ public class BooksForm extends javax.swing.JInternalFrame {
                     newStatement().executeUpdate("UPDATE bookstbl SET title ='"+titletxt.getText()+"',author='"+authortxt.getText()+"',publisher = '"+publishertxt.getText()+"',genre = '"+genretxt.getText()+"', location='"+location+"' WHERE bookid = " + idlbl.getText());
                     JOptionPane.showMessageDialog(null,"Book #"+idlbl.getText()+" has been updated");
                     setFields(false);
+                    updateTable();
                     setDefaultButton(updatebtn, "Update Book");
                     updatebtn.setText("Update Book");
                 }
@@ -549,13 +620,8 @@ public class BooksForm extends javax.swing.JInternalFrame {
 
     private void searchtxtKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_searchtxtKeyReleased
         try{
-            if(searchcmb.getSelectedItem() == "customerid"){
-                rs = newStatement().executeQuery("SELECT * FROM bookstbl WHERE "+searchcmb.getSelectedItem().toString()+" = "+searchtxt.getText());
-                booktbl.setModel(DbUtils.resultSetToTableModel(rs));
-            }else{
-                rs = newStatement().executeQuery("SELECT * FROM bookstbl WHERE "+searchcmb.getSelectedItem().toString()+" like '%"+searchtxt.getText()+"%'");
-                booktbl.setModel(DbUtils.resultSetToTableModel(rs));
-            }
+            rs = newStatement().executeQuery("SELECT * FROM bookstbl WHERE "+searchcmb.getSelectedItem().toString()+" like '%"+searchtxt.getText()+"%'");
+            booktbl.setModel(DbUtils.resultSetToTableModel(rs));
         }catch(Exception e){
             System.out.println(e);
         }
@@ -577,6 +643,7 @@ public class BooksForm extends javax.swing.JInternalFrame {
     private javax.swing.JTextField genretxt;
     private javax.swing.JLabel idlbl;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -590,6 +657,8 @@ public class BooksForm extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel6;
+    private javax.swing.JPanel jPanel7;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField publishertxt;
     private javax.swing.JButton refreshbtn;

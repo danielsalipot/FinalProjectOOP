@@ -23,19 +23,16 @@ public class CustomerForm extends javax.swing.JInternalFrame {
         customertblList = java.beans.Beans.isDesignTime() ? java.util.Collections.emptyList() : customertblQuery.getResultList();
         customertblQuery1 = java.beans.Beans.isDesignTime() ? null : entityManager.createQuery("SELECT c FROM Customertbl c");
         customertblList1 = java.beans.Beans.isDesignTime() ? java.util.Collections.emptyList() : customertblQuery1.getResultList();
+        jLabel10 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         email = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         address = new javax.swing.JTextField();
-        refresh = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
-        updatebtn = new javax.swing.JButton();
-        cancelbtn = new javax.swing.JButton();
         fname = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
-        addbtn = new javax.swing.JButton();
         lname = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
@@ -43,26 +40,37 @@ public class CustomerForm extends javax.swing.JInternalFrame {
         lblId = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         custtbl = new javax.swing.JTable();
-        deletebtn = new javax.swing.JButton();
-        jLabel9 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         searchcmb = new javax.swing.JComboBox<>();
         searchtxt = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
+        refresh = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
+        jPanel6 = new javax.swing.JPanel();
+        addbtn = new javax.swing.JButton();
+        cancelbtn = new javax.swing.JButton();
+        updatebtn = new javax.swing.JButton();
+        deletebtn = new javax.swing.JButton();
+        jPanel7 = new javax.swing.JPanel();
+        jLabel11 = new javax.swing.JLabel();
+        jPanel8 = new javax.swing.JPanel();
+        jLabel9 = new javax.swing.JLabel();
+
+        jLabel10.setFont(new java.awt.Font("Verdana", 0, 16)); // NOI18N
+        jLabel10.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel10.setText("First Name:");
 
         setBackground(new java.awt.Color(51, 51, 51));
         setClosable(true);
         setIconifiable(true);
-        setMaximizable(true);
         setResizable(true);
 
         org.jdesktop.beansbinding.Binding binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, custtbl, org.jdesktop.beansbinding.ELProperty.create("${selectedElement.customerid}"), jLabel7, org.jdesktop.beansbinding.BeanProperty.create("text"));
         bindingGroup.addBinding(binding);
 
-        jPanel1.setBackground(new java.awt.Color(51, 51, 51));
+        jPanel1.setBackground(new java.awt.Color(0, 0, 0));
         jPanel1.setForeground(new java.awt.Color(255, 255, 255));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -90,44 +98,10 @@ public class CustomerForm extends javax.swing.JInternalFrame {
 
         jPanel1.add(address, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 150, 219, 30));
 
-        refresh.setBackground(new java.awt.Color(0, 102, 102));
-        refresh.setFont(new java.awt.Font("Verdana", 0, 14)); // NOI18N
-        refresh.setForeground(new java.awt.Color(255, 255, 255));
-        refresh.setText("Refresh Table");
-        refresh.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                refreshActionPerformed(evt);
-            }
-        });
-        jPanel1.add(refresh, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 330, 150, 40));
-
         jLabel5.setFont(new java.awt.Font("Verdana", 0, 16)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("Home Address:");
         jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 150, -1, -1));
-
-        updatebtn.setBackground(new java.awt.Color(0, 0, 0));
-        updatebtn.setFont(new java.awt.Font("Verdana", 0, 14)); // NOI18N
-        updatebtn.setForeground(new java.awt.Color(255, 255, 255));
-        updatebtn.setText("Update Customer");
-        updatebtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                updatebtnActionPerformed(evt);
-            }
-        });
-        jPanel1.add(updatebtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 270, 160, 50));
-
-        cancelbtn.setBackground(new java.awt.Color(255, 51, 51));
-        cancelbtn.setFont(new java.awt.Font("Verdana", 0, 14)); // NOI18N
-        cancelbtn.setForeground(new java.awt.Color(255, 255, 255));
-        cancelbtn.setText("Cancel");
-        cancelbtn.setEnabled(false);
-        cancelbtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cancelbtnActionPerformed(evt);
-            }
-        });
-        jPanel1.add(cancelbtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 330, 640, 40));
 
         fname.setBackground(new java.awt.Color(240, 240, 240));
         fname.setEnabled(false);
@@ -141,17 +115,6 @@ public class CustomerForm extends javax.swing.JInternalFrame {
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("First Name:");
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 90, -1, -1));
-
-        addbtn.setBackground(new java.awt.Color(0, 0, 0));
-        addbtn.setFont(new java.awt.Font("Verdana", 0, 14)); // NOI18N
-        addbtn.setForeground(new java.awt.Color(255, 255, 255));
-        addbtn.setText("Add Customer");
-        addbtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                addbtnActionPerformed(evt);
-            }
-        });
-        jPanel1.add(addbtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 270, 160, 50));
 
         lname.setEnabled(false);
 
@@ -211,29 +174,15 @@ public class CustomerForm extends javax.swing.JInternalFrame {
         });
         jScrollPane1.setViewportView(custtbl);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 388, 1080, 440));
-
-        deletebtn.setBackground(new java.awt.Color(255, 0, 0));
-        deletebtn.setFont(new java.awt.Font("Verdana", 0, 14)); // NOI18N
-        deletebtn.setForeground(new java.awt.Color(255, 255, 255));
-        deletebtn.setText("Delete Customer");
-        deletebtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                deletebtnActionPerformed(evt);
-            }
-        });
-        jPanel1.add(deletebtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 270, 160, 50));
-
-        jLabel9.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
-        jLabel9.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel9.setText("LIBRARY CARD SYSTEM");
-        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 10, 380, 50));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 400, 1060, 400));
 
         jPanel3.setBackground(new java.awt.Color(153, 0, 0));
 
-        jPanel2.setBackground(new java.awt.Color(51, 51, 51));
+        jPanel2.setBackground(new java.awt.Color(102, 0, 0));
 
+        searchcmb.setBackground(new java.awt.Color(102, 0, 0));
         searchcmb.setFont(new java.awt.Font("Verdana", 0, 15)); // NOI18N
+        searchcmb.setForeground(new java.awt.Color(255, 255, 255));
         searchcmb.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "customerid", "firstname", "lastname", "contactnum", "email", "address" }));
 
         searchtxt.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -246,19 +195,30 @@ public class CustomerForm extends javax.swing.JInternalFrame {
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
         jLabel8.setText("SEARCH");
 
+        refresh.setBackground(new java.awt.Color(102, 0, 0));
+        refresh.setFont(new java.awt.Font("Verdana", 0, 14)); // NOI18N
+        refresh.setForeground(new java.awt.Color(255, 255, 255));
+        refresh.setText("Refresh Table");
+        refresh.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                refreshActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(120, 120, 120)
+                .addGap(137, 137, 137)
                 .addComponent(jLabel8)
-                .addGap(0, 122, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(searchtxt)
-                    .addComponent(searchcmb, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(searchtxt, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(searchcmb, javax.swing.GroupLayout.Alignment.TRAILING, 0, 336, Short.MAX_VALUE)
+                    .addComponent(refresh, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -266,10 +226,12 @@ public class CustomerForm extends javax.swing.JInternalFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(searchcmb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(searchtxt, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 77, Short.MAX_VALUE)
+                .addComponent(refresh, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -284,23 +246,23 @@ public class CustomerForm extends javax.swing.JInternalFrame {
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+            .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
-        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 100, 320, 130));
+        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 70, 360, 250));
 
-        jPanel4.setBackground(new java.awt.Color(153, 0, 0));
+        jPanel4.setBackground(new java.awt.Color(102, 102, 0));
 
-        jPanel5.setBackground(new java.awt.Color(51, 51, 51));
+        jPanel5.setBackground(new java.awt.Color(51, 51, 0));
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 696, Short.MAX_VALUE)
+            .addGap(0, 708, Short.MAX_VALUE)
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -313,8 +275,8 @@ public class CustomerForm extends javax.swing.JInternalFrame {
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -324,7 +286,134 @@ public class CustomerForm extends javax.swing.JInternalFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, 710, 190));
+        jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 70, 720, 190));
+
+        jPanel6.setBackground(new java.awt.Color(51, 51, 0));
+
+        addbtn.setBackground(new java.awt.Color(0, 0, 0));
+        addbtn.setFont(new java.awt.Font("Verdana", 0, 14)); // NOI18N
+        addbtn.setForeground(new java.awt.Color(255, 255, 255));
+        addbtn.setText("Add Customer");
+        addbtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addbtnActionPerformed(evt);
+            }
+        });
+
+        cancelbtn.setBackground(new java.awt.Color(255, 51, 51));
+        cancelbtn.setFont(new java.awt.Font("Verdana", 0, 14)); // NOI18N
+        cancelbtn.setForeground(new java.awt.Color(255, 255, 255));
+        cancelbtn.setText("Cancel");
+        cancelbtn.setEnabled(false);
+        cancelbtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cancelbtnActionPerformed(evt);
+            }
+        });
+
+        updatebtn.setBackground(new java.awt.Color(0, 0, 0));
+        updatebtn.setFont(new java.awt.Font("Verdana", 0, 14)); // NOI18N
+        updatebtn.setForeground(new java.awt.Color(255, 255, 255));
+        updatebtn.setText("Update Customer");
+        updatebtn.setEnabled(false);
+        updatebtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                updatebtnActionPerformed(evt);
+            }
+        });
+
+        deletebtn.setBackground(new java.awt.Color(255, 0, 0));
+        deletebtn.setFont(new java.awt.Font("Verdana", 0, 14)); // NOI18N
+        deletebtn.setForeground(new java.awt.Color(255, 255, 255));
+        deletebtn.setText("Delete Customer");
+        deletebtn.setEnabled(false);
+        deletebtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deletebtnActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
+        jPanel6.setLayout(jPanel6Layout);
+        jPanel6Layout.setHorizontalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
+                .addContainerGap(42, Short.MAX_VALUE)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel6Layout.createSequentialGroup()
+                        .addComponent(addbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(65, 65, 65)
+                        .addComponent(updatebtn, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(60, 60, 60)
+                        .addComponent(deletebtn, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cancelbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 640, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(38, 38, 38))
+        );
+        jPanel6Layout.setVerticalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addGap(19, 19, 19)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(addbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(deletebtn, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(updatebtn, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(10, 10, 10)
+                .addComponent(cancelbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(11, Short.MAX_VALUE))
+        );
+
+        jPanel1.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 260, 720, 130));
+
+        jPanel7.setBackground(new java.awt.Color(0, 0, 0));
+
+        jLabel11.setFont(new java.awt.Font("Verdana", 0, 36)); // NOI18N
+        jLabel11.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel11.setText("Customer Table");
+
+        javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
+        jPanel7.setLayout(jPanel7Layout);
+        jPanel7Layout.setHorizontalGroup(
+            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
+                .addContainerGap(42, Short.MAX_VALUE)
+                .addComponent(jLabel11)
+                .addGap(35, 35, 35))
+        );
+        jPanel7Layout.setVerticalGroup(
+            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
+                .addContainerGap(29, Short.MAX_VALUE)
+                .addComponent(jLabel11)
+                .addContainerGap())
+        );
+
+        jPanel1.add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 310, 360, 80));
+
+        jPanel8.setBackground(new java.awt.Color(51, 51, 0));
+
+        jLabel9.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel9.setText("LIBRARY CARD SYSTEM");
+
+        javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
+        jPanel8.setLayout(jPanel8Layout);
+        jPanel8Layout.setHorizontalGroup(
+            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel8Layout.createSequentialGroup()
+                .addGap(156, 156, 156)
+                .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 380, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(544, Short.MAX_VALUE))
+        );
+        jPanel8Layout.setVerticalGroup(
+            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel8Layout.createSequentialGroup()
+                .addContainerGap(14, Short.MAX_VALUE)
+                .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+
+        jPanel1.add(jPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1080, 70));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -333,17 +422,14 @@ public class CustomerForm extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(409, 409, 409)
                 .addComponent(jLabel7))
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 808, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel7)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(0, 0, 0)
+                .addComponent(jLabel7))
         );
 
         bindingGroup.bind();
@@ -381,8 +467,7 @@ public class CustomerForm extends javax.swing.JInternalFrame {
     // Set button to default State
     public void setDefaultButton(JButton b){
         b.setBackground(new Color(0,0,0));
-        b.setForeground(Color.white);
-        cancelbtn.setEnabled(false);
+        b.setForeground(Color.WHITE);
     }
     
     // Returns new connection object
@@ -399,13 +484,16 @@ public class CustomerForm extends javax.swing.JInternalFrame {
     }
     
     private void addbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addbtnActionPerformed
-        if(addbtn.getText() != "Save Changes"){
+        if(addbtn.getText() == "Add Customer"){
             setFields(true);
             setSaveButton(addbtn);
+            deletebtn.setEnabled(false);
             clearTxt();
+            updatebtn.setEnabled(false);
+            cancelbtn.setEnabled(true);
         }else{
             try {
-               if(fname.getText() == "" || lname.getText() == "" || cnum.getText() == "" || email.getText() == "" ||address.getText() == ""){
+               if("".equals(fname.getText()) && "".equals(lname.getText()) && "".equals(cnum.getText()) && "".equals(email.getText()) && "".equals(address.getText())){
                     JOptionPane.showMessageDialog(null, "All fields are required");
                }
                else{
@@ -417,10 +505,12 @@ public class CustomerForm extends javax.swing.JInternalFrame {
                 JOptionPane.showMessageDialog(null, "Creation Failed");
                 System.out.println(e);
             }
-            
+            cancelbtn.setEnabled(false);
             setFields(false);
             addbtn.setText("Add Customer");
             setDefaultButton(addbtn);
+            deletebtn.setEnabled(false);
+            addbtn.setEnabled(true);
         }
     }//GEN-LAST:event_addbtnActionPerformed
 
@@ -435,14 +525,17 @@ public class CustomerForm extends javax.swing.JInternalFrame {
     }
     
     private void updatebtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updatebtnActionPerformed
-       if(updatebtn.getText() != "Save Changes"){
+       if(!"Save Changes".equals(updatebtn.getText())){
             setFields(true);
+            cancelbtn.setEnabled(true);
+            deletebtn.setEnabled(false);
+            addbtn.setEnabled(false);
             setSaveButton(updatebtn);
         }else{
-           if(fname.getText() == "" || lname.getText() == "" || cnum.getText() == "" || email.getText() == "" ||address.getText() == ""){
+           if(!"".equals(fname.getText()) && !"".equals(lname.getText()) && !"".equals(cnum.getText()) && !"".equals(email.getText()) && !"".equals(address.getText())){
                {
                     try {
-                        newStatement().executeUpdate("UPDATE customertbl SET firstname='"+fname.getText()+"', lastname = '"+lname.getText()+"', contactnum = '"+cnum.getText()+"',email = '"+email.getText()+"', address = '"+address.getText()+"' WHERE customerid = "+jLabel7.getText()+"");
+                        newStatement().executeUpdate("UPDATE customertbl SET firstname='"+fname.getText()+"', lastname = '"+lname.getText()+"', contactnum = '"+cnum.getText()+"',email = '"+email.getText()+"', address = '"+address.getText()+"' WHERE customerid = "+lblId.getText()+"");
                         JOptionPane.showMessageDialog(null, "Update Successfull");
                         setFields(false);
                         updateTable();
@@ -453,6 +546,10 @@ public class CustomerForm extends javax.swing.JInternalFrame {
                         System.out.println(e);
                         JOptionPane.showMessageDialog(null, "Update Failed");
                     }
+                    cancelbtn.setEnabled(false);
+                    deletebtn.setEnabled(false);
+                    addbtn.setEnabled(true);
+                    updatebtn.setEnabled(false);
                 }    
             }
         }
@@ -463,10 +560,15 @@ public class CustomerForm extends javax.swing.JInternalFrame {
         clearTxt();
         setDefaultButton(addbtn);
         setDefaultButton(updatebtn);
+        deletebtn.setText("Delete Customer");
+        deletebtn.setEnabled(false);
+        updatebtn.setEnabled(false);
+        updatebtn.setText("Update Customer");
+        addbtn.setText("Add Customer");
         cancelbtn.setEnabled(false);
+        addbtn.setEnabled(true);
     }//GEN-LAST:event_cancelbtnActionPerformed
 
-    // jLabel7 = customer id
     private void custtblClick(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_custtblClick
         fname.setText(custtbl.getValueAt(custtbl.getSelectedRow(), 1).toString());
         lname.setText(custtbl.getValueAt(custtbl.getSelectedRow(), 2).toString());
@@ -474,17 +576,14 @@ public class CustomerForm extends javax.swing.JInternalFrame {
         email.setText(custtbl.getValueAt(custtbl.getSelectedRow(), 4).toString());
         address.setText(custtbl.getValueAt(custtbl.getSelectedRow(), 5).toString());
         lblId.setText(custtbl.getValueAt(custtbl.getSelectedRow(), 0).toString());
+        updatebtn.setEnabled(true);
+        deletebtn.setEnabled(true);
     }//GEN-LAST:event_custtblClick
 
     private void searchtxtKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_searchtxtKeyReleased
         try{
-            if(searchcmb.getSelectedItem() == "customerid"){
-                rs = newStatement().executeQuery("SELECT * FROM customertbl WHERE "+searchcmb.getSelectedItem().toString()+" = "+searchtxt.getText());
-                custtbl.setModel(DbUtils.resultSetToTableModel(rs));
-            }else{
-                rs = newStatement().executeQuery("SELECT * FROM customertbl WHERE "+searchcmb.getSelectedItem().toString()+" like '%"+searchtxt.getText()+"%'");
-                custtbl.setModel(DbUtils.resultSetToTableModel(rs));
-            }
+            rs = newStatement().executeQuery("SELECT * FROM customertbl WHERE "+searchcmb.getSelectedItem().toString()+" like '%"+searchtxt.getText()+"%'");
+            custtbl.setModel(DbUtils.resultSetToTableModel(rs));
         }catch(Exception e){
             System.out.println(e);
         }
@@ -495,20 +594,23 @@ public class CustomerForm extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_refreshActionPerformed
 
     private void deletebtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deletebtnActionPerformed
-         if(cancelbtn.getText() == "Delete Customer"){
-            setSaveButton(cancelbtn);
-            cancelbtn.setText("Delete User: "+jLabel7.getText());
+        if("Delete Customer".equals(deletebtn.getText())){
+            deletebtn.setText("Delete Customer: "+lblId.getText());
+            cancelbtn.setEnabled(true);
         }
         else{
-            cancelbtn.setBackground(new Color(0,102,102));
-            cancelbtn.setText("Delete Customer");
+            deletebtn.setText("Delete Customer");
+            cancelbtn.setEnabled(false);
+            deletebtn.setEnabled(false);
+            updatebtn.setEnabled(false);
             try{
-                newStatement().executeUpdate("DELETE FROM customertbl where customerid = "+jLabel7.getText());
+                newStatement().executeUpdate("DELETE FROM customertbl where customerid = "+lblId.getText());
                 updateTable();
-                JOptionPane.showMessageDialog(null, "User: "+jLabel7.getText()+" record has been deleted");
+                JOptionPane.showMessageDialog(null, "Customer: "+lblId.getText()+" record has been deleted");
             }catch(Exception e){
                 System.out.println(e);
             }
+            clearTxt();
         }
     }//GEN-LAST:event_deletebtnActionPerformed
 
@@ -528,6 +630,8 @@ public class CustomerForm extends javax.swing.JInternalFrame {
     private javax.persistence.EntityManager entityManager;
     private javax.swing.JTextField fname;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -541,6 +645,9 @@ public class CustomerForm extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel6;
+    private javax.swing.JPanel jPanel7;
+    private javax.swing.JPanel jPanel8;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblId;
     private javax.swing.JTextField lname;

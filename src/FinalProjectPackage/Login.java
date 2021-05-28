@@ -6,8 +6,6 @@ public class Login extends javax.swing.JFrame {
     ParentForm pf = new ParentForm();
     public Login() {
         initComponents();
-        usernametxt.setText("admin");
-        passwordf.setText("admin");
     }
 
     @SuppressWarnings("unchecked")

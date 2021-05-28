@@ -67,7 +67,8 @@ public final class ReturnForm extends javax.swing.JInternalFrame {
     
     public void fillComboBox(){
         try{
-            rs = newStatement().executeQuery("SELECT transid FROM transactiontbl");
+            tcmb.removeAllItems();
+            ResultSet rs = newStatement().executeQuery("SELECT transid FROM transactiontbl");
             while(rs.next()){
                 tcmb.addItem(rs.getString("transid"));
             }
@@ -230,6 +231,7 @@ public final class ReturnForm extends javax.swing.JInternalFrame {
         jButton3 = new javax.swing.JButton();
         jPanel5 = new javax.swing.JPanel();
         jLabel15 = new javax.swing.JLabel();
+        refresh = new javax.swing.JButton();
         jLabel21 = new javax.swing.JLabel();
         jLabel20 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
@@ -247,6 +249,23 @@ public final class ReturnForm extends javax.swing.JInternalFrame {
         setIconifiable(true);
         setResizable(true);
         setOpaque(false);
+        addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
+            public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
+                formInternalFrameActivated(evt);
+            }
+            public void internalFrameClosed(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameClosing(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameDeactivated(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameDeiconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameIconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameOpened(javax.swing.event.InternalFrameEvent evt) {
+            }
+        });
 
         jPanel8.setBackground(new java.awt.Color(102, 0, 51));
 
@@ -669,25 +688,41 @@ public final class ReturnForm extends javax.swing.JInternalFrame {
         jPanel5.setBackground(new java.awt.Color(0, 0, 0));
 
         jLabel15.setBackground(new java.awt.Color(153, 0, 0));
-        jLabel15.setFont(new java.awt.Font("Arial", 0, 48)); // NOI18N
+        jLabel15.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
         jLabel15.setForeground(new java.awt.Color(255, 255, 255));
         jLabel15.setText("Transaction Table");
+
+        refresh.setBackground(new java.awt.Color(204, 204, 255));
+        refresh.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
+        refresh.setText("Refresh Table");
+        refresh.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                refreshActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
+            .addGroup(jPanel5Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel15)
-                .addGap(56, 56, 56))
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
+                        .addComponent(refresh, javax.swing.GroupLayout.PREFERRED_SIZE, 445, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(32, 32, 32))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
+                        .addComponent(jLabel15)
+                        .addGap(153, 153, 153))))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
+            .addGroup(jPanel5Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel15)
-                .addGap(22, 22, 22))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(refresh, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         jLabel21.setBackground(new java.awt.Color(102, 102, 0));
@@ -758,11 +793,6 @@ public final class ReturnForm extends javax.swing.JInternalFrame {
                 transtblMouseClicked(evt);
             }
         });
-        transtbl.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                transtblKeyReleased(evt);
-            }
-        });
         jScrollPane1.setViewportView(transtbl);
 
         jPanel4.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 1240, 350));
@@ -815,7 +845,7 @@ public final class ReturnForm extends javax.swing.JInternalFrame {
                 .addGap(0, 0, 0)
                 .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
-                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 368, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, 378, Short.MAX_VALUE))
         );
 
         pack();
@@ -829,10 +859,13 @@ public final class ReturnForm extends javax.swing.JInternalFrame {
         if(indicator.getText().contains("to be")){
             returnbtn.setEnabled(true);
             custpayment.setEnabled(false);
+            paybtn.setEnabled(false);
+            latefeetxt.setText("");
             if(indicator.getText().contains("late")){
                  paybtn.setEnabled(true);
                  custpayment.setEnabled(true);
                  returnbtn.setEnabled(false);
+                 ComputeFee((int) ChronoUnit.DAYS.between(returndate, returned));
             }          
         }
         else{
@@ -844,7 +877,6 @@ public final class ReturnForm extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_tcmbItemStateChanged
 
     private void returnbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_returnbtnActionPerformed
-        if(returned.isBefore(returndate)){
             try{
                 newStatement().executeUpdate("UPDATE transactiontbl SET returndate = '"+returnedtxt.getText()+"' WHERE transid = " + tcmb.getSelectedItem());
                 JOptionPane.showMessageDialog(null, "Transaction Complete");
@@ -855,12 +887,7 @@ public final class ReturnForm extends javax.swing.JInternalFrame {
             }catch(Exception e){
                 System.out.println(e);
             }
-        }
     }//GEN-LAST:event_returnbtnActionPerformed
-
-    private void transtblKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_transtblKeyReleased
-
-    }//GEN-LAST:event_transtblKeyReleased
 
     private void transtblMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_transtblMouseClicked
         for(int i = 0; i < tcmb.getItemCount();i++){
@@ -887,6 +914,15 @@ public final class ReturnForm extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(this, "Customer payment not enough");
         }
     }//GEN-LAST:event_paybtnActionPerformed
+
+    private void refreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshActionPerformed
+        updateTable();
+    }//GEN-LAST:event_refreshActionPerformed
+
+    private void formInternalFrameActivated(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameActivated
+
+        fillComboBox();
+    }//GEN-LAST:event_formInternalFrameActivated
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -940,6 +976,7 @@ public final class ReturnForm extends javax.swing.JInternalFrame {
     private javax.swing.JTextField locationtxt;
     private javax.swing.JButton paybtn;
     private javax.swing.JTextField publishertxt;
+    private javax.swing.JButton refresh;
     private javax.swing.JButton returnbtn;
     private javax.swing.JLabel returndatetxt;
     private javax.swing.JLabel returnedtxt;
