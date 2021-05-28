@@ -90,7 +90,7 @@ public class CustomerForm extends javax.swing.JInternalFrame {
 
         jPanel1.add(address, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 150, 219, 30));
 
-        refresh.setBackground(new java.awt.Color(204, 0, 0));
+        refresh.setBackground(new java.awt.Color(0, 102, 102));
         refresh.setFont(new java.awt.Font("Verdana", 0, 14)); // NOI18N
         refresh.setForeground(new java.awt.Color(255, 255, 255));
         refresh.setText("Refresh Table");
@@ -211,9 +211,9 @@ public class CustomerForm extends javax.swing.JInternalFrame {
         });
         jScrollPane1.setViewportView(custtbl);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 388, 1084, 420));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 388, 1080, 440));
 
-        deletebtn.setBackground(new java.awt.Color(0, 102, 102));
+        deletebtn.setBackground(new java.awt.Color(255, 0, 0));
         deletebtn.setFont(new java.awt.Font("Verdana", 0, 14)); // NOI18N
         deletebtn.setForeground(new java.awt.Color(255, 255, 255));
         deletebtn.setText("Delete Customer");
@@ -314,7 +314,7 @@ public class CustomerForm extends javax.swing.JInternalFrame {
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(8, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
